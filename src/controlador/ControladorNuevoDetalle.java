@@ -43,12 +43,12 @@ public class ControladorNuevoDetalle {
 
     public static void ActualizarTablaProductos(JTable t) {
         DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-        modelo.setColumnCount(0);
+        //modelo.setColumnCount(0);
         modelo.setNumRows(0);
-        modelo.addColumn("Codigo");
+        /*modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
         modelo.addColumn("Cantidad");
-        modelo.addColumn("Precio unit");
+        modelo.addColumn("Precio unit");*/
         DB db = new DB();
         ArrayList<Producto> pl = db.obtenerProductos();
         for (Producto p : pl) {
@@ -61,6 +61,24 @@ public class ControladorNuevoDetalle {
                 fila[3] = p.getPrecio();
                 modelo.addRow(fila);
             }
+        }
+    }
+    
+    public static void ActualizarTablaClientes(JTable t) {
+        DefaultTableModel modelo = (DefaultTableModel) t.getModel();
+        //modelo.setColumnCount(0);
+        modelo.setNumRows(0);
+        /*modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Cuil");*/
+        DB db = new DB();
+        ArrayList<Cliente> cl = db.obtenerClientes();
+        for (Cliente c : cl) {
+            Object[] fila = new Object[3];
+            fila[0] = c.getId();
+            fila[1] = c.getNombre();
+            fila[2] = c.getCuil();
+            modelo.addRow(fila);
         }
     }
     
@@ -82,12 +100,12 @@ public class ControladorNuevoDetalle {
 
     public static void BuscarProducto(JTable t, JTextField txtbuscar) {
         DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-        modelo.setColumnCount(0);
+        //modelo.setColumnCount(0);
         modelo.setNumRows(0);
-        modelo.addColumn("Codigo");
+        /*modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
         modelo.addColumn("Cantidad");
-        modelo.addColumn("Precio unit");
+        modelo.addColumn("Precio unit");*/
         DB db = new DB();
         ArrayList<Producto> pl = db.obtenerProductos();
         for (Producto p : pl) {
@@ -110,11 +128,11 @@ public class ControladorNuevoDetalle {
     public static void BuscarCliente(JTable t, JTextField txtbuscar) {
         if (t.getSelectedRow() == -1) {
             DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-            modelo.setColumnCount(0);
+            //modelo.setColumnCount(0);
             modelo.setNumRows(0);
-            modelo.addColumn("ID");
+            /*modelo.addColumn("ID");
             modelo.addColumn("Nombre");
-            modelo.addColumn("Cuil");
+            modelo.addColumn("Cuil");*/
             DB db = new DB();
             ArrayList<Cliente> cl = db.obtenerClientes();
             for (Cliente c : cl) {
@@ -134,24 +152,6 @@ public class ControladorNuevoDetalle {
 
     public static void VaciarBusqueda(JTextField txtbuscar) {
         txtbuscar.setText("");
-    }
-
-    public static void ActualizarTablaClientes(JTable t) {
-        DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-        modelo.setColumnCount(0);
-        modelo.setNumRows(0);
-        modelo.addColumn("ID");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Cuil");
-        DB db = new DB();
-        ArrayList<Cliente> cl = db.obtenerClientes();
-        for (Cliente c : cl) {
-            Object[] fila = new Object[3];
-            fila[0] = c.getId();
-            fila[1] = c.getNombre();
-            fila[2] = c.getCuil();
-            modelo.addRow(fila);
-        }
     }
 
     public static void facturar(JTable t, int id) {

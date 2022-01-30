@@ -424,7 +424,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28))
+                .addContainerGap())
         );
 
         jMenu1.setText("Menu");
@@ -467,7 +467,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         pack();
@@ -568,7 +568,9 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnCancelar, tablaProductos);
         ControladorNuevoDetalle.ActivarDesactivarBotonFacturar(btnFacturar, txtIdCliente, tablaDetalles);
         ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
+        ControladorNuevoDetalle.VaciarBusqueda(txtBuscarProducto);
         ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorNuevoDetalle.BuscarProducto(tablaProductos, txtBuscarProducto);
         ControladorNuevoDetalle.AjustarTabla(tablaDetalles);
         ControladorNuevoDetalle.AjustarTabla(tablaClientes);
     }//GEN-LAST:event_btnCancelarCompraActionPerformed
@@ -580,10 +582,12 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
 
     private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
         ControladorNuevoDetalle.BuscarProducto(tablaProductos, txtBuscarProducto);
+        //ControladorNuevoDetalle.AjustarTabla(tablaProductos);
     }//GEN-LAST:event_txtBuscarProductoKeyReleased
 
     private void txtBuscarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClienteKeyReleased
         ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+        //ControladorNuevoDetalle.AjustarTabla(tablaClientes);
     }//GEN-LAST:event_txtBuscarClienteKeyReleased
 
     private void lblLimpiarBusquedaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLimpiarBusquedaClienteMouseClicked

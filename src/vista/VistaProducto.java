@@ -48,7 +48,7 @@ public class VistaProducto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        txtBuscarCliente = new javax.swing.JTextField();
+        txtBuscarProducto = new javax.swing.JTextField();
         lblLimpiarBusquedaCliente = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
@@ -183,13 +183,10 @@ public class VistaProducto extends javax.swing.JFrame {
         tablaProductos.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "Codigo", "Descripcion", "Cantidad", "Precio", "Activo"
             }
         ));
         tablaProductos.setRowHeight(25);
@@ -208,9 +205,9 @@ public class VistaProducto extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Buscar producto");
 
-        txtBuscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtBuscarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuscarClienteKeyReleased(evt);
+                txtBuscarProductoKeyReleased(evt);
             }
         });
 
@@ -237,7 +234,7 @@ public class VistaProducto extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblLimpiarBusquedaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,7 +247,7 @@ public class VistaProducto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
                             .addComponent(lblLimpiarBusquedaCliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -312,6 +309,8 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.DesactivarBoton(btnEliminar);
         ControladorProducto.DesactivarBoton(btnCancelar);
         ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
+        ControladorProducto.ActivarTabla(tablaProductos);
+        ControladorProducto.VaciarBusqueda(txtBuscarProducto);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -324,6 +323,8 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.DesactivarBoton(btnCancelar);
         ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
+        ControladorProducto.ActivarTabla(tablaProductos);
+        ControladorProducto.VaciarBusqueda(txtBuscarProducto);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -334,21 +335,24 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.DesactivarBoton(btnCancelar);
         ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
+        ControladorProducto.ActivarTabla(tablaProductos);
+        ControladorProducto.VaciarBusqueda(txtBuscarProducto);
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyReleased
         ControladorProducto.ActivarDesactivarBotonGuardar(btnGuardar, txtDescripcion, txtCantidad, txtPrecio);
-        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos);
+        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos, txtBuscarProducto);
     }//GEN-LAST:event_txtDescripcionKeyReleased
 
     private void txtCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyReleased
         ControladorProducto.ActivarDesactivarBotonGuardar(btnGuardar, txtDescripcion, txtCantidad, txtPrecio);
-        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos);
+        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos, txtBuscarProducto);
     }//GEN-LAST:event_txtCantidadKeyReleased
 
     private void txtPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyReleased
         ControladorProducto.ActivarDesactivarBotonGuardar(btnGuardar, txtDescripcion, txtCantidad, txtPrecio);
-        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos);
+        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos, txtBuscarProducto);
     }//GEN-LAST:event_txtPrecioKeyReleased
 
     private void tablaProductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMousePressed
@@ -358,6 +362,7 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.ActivarBoton(btnCancelar);
         ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
+        ControladorProducto.DesactivarTabla(tablaProductos);
     }//GEN-LAST:event_tablaProductosMousePressed
 
     private void menuNuevoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoDetalleActionPerformed
@@ -400,13 +405,17 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
     }//GEN-LAST:event_btnVerOcultarTodosActionPerformed
 
-    private void txtBuscarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClienteKeyReleased
-        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
-    }//GEN-LAST:event_txtBuscarClienteKeyReleased
+    private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto);
+        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos, txtBuscarProducto);
+
+    }//GEN-LAST:event_txtBuscarProductoKeyReleased
 
     private void lblLimpiarBusquedaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLimpiarBusquedaClienteMouseClicked
-        //ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
-        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorProducto.VaciarBusqueda(txtBuscarProducto);
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto);
+        ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos, txtBuscarProducto);
+
     }//GEN-LAST:event_lblLimpiarBusquedaClienteMouseClicked
 
     /**
@@ -471,7 +480,7 @@ public class VistaProducto extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMaestroDetalle;
     private javax.swing.JMenuItem menuNuevoDetalle;
     private javax.swing.JTable tablaProductos;
-    private javax.swing.JTextField txtBuscarCliente;
+    private javax.swing.JTextField txtBuscarProducto;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecio;

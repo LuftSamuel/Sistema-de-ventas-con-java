@@ -298,7 +298,7 @@ public class VistaCliente extends javax.swing.JFrame {
                             .addComponent(lblLimpiarBusquedaCliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Menu");
@@ -341,7 +341,7 @@ public class VistaCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,6 +357,8 @@ public class VistaCliente extends javax.swing.JFrame {
         ControladorCliente.DesactivarBoton(btnCancelar);
         ControladorCliente.ActivarDesactivarTxt(txtNombre, tablaClientes);
         ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes);
+        ControladorCliente.ActivarTabla(tablaClientes);
+        ControladorCliente.VaciarBusqueda(txtBuscarCliente);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -369,11 +371,13 @@ public class VistaCliente extends javax.swing.JFrame {
         ControladorCliente.DesactivarBoton(btnCancelar);
         ControladorCliente.ActivarDesactivarTxt(txtNombre, tablaClientes);
         ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes);
+        ControladorCliente.ActivarTabla(tablaClientes);
+        ControladorCliente.VaciarBusqueda(txtBuscarCliente);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
-        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtNombreKeyReleased
 
     private void tablaClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMousePressed
@@ -383,6 +387,7 @@ public class VistaCliente extends javax.swing.JFrame {
         ControladorCliente.ActivarBoton(btnCancelar);
         ControladorCliente.ActivarDesactivarTxt(txtNombre, tablaClientes);
         ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes);
+        ControladorCliente.DesactivarTabla(tablaClientes);
     }//GEN-LAST:event_tablaClientesMousePressed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -393,6 +398,10 @@ public class VistaCliente extends javax.swing.JFrame {
         ControladorCliente.DesactivarBoton(btnCancelar);
         ControladorCliente.ActivarDesactivarTxt(txtNombre, tablaClientes);
         ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes);
+        ControladorCliente.VaciarBusqueda(txtBuscarCliente);
+        ControladorCliente.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorCliente.ActivarTabla(tablaClientes);
+        ControladorCliente.VaciarBusqueda(txtBuscarCliente);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void menuNuevoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoDetalleActionPerformed
@@ -412,31 +421,33 @@ public class VistaCliente extends javax.swing.JFrame {
 
     private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
         ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
-        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtTelefonoKeyReleased
 
     private void txtDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyReleased
         ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
-        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtDireccionKeyReleased
 
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
         ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
-        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtCorreoKeyReleased
 
     private void txtCuilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuilKeyReleased
         ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
-        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtCuilKeyReleased
 
     private void txtBuscarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClienteKeyReleased
-        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorCliente.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtBuscarClienteKeyReleased
 
     private void lblLimpiarBusquedaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLimpiarBusquedaClienteMouseClicked
-        //ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
-        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorCliente.VaciarBusqueda(txtBuscarCliente);
+        ControladorCliente.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_lblLimpiarBusquedaClienteMouseClicked
 
     /**

@@ -69,6 +69,38 @@ public class ControladorCliente {
         }
     }
 
+    public static void BuscarCliente(JTable t, JTextField txtbuscar) {
+        if (t.getSelectedRow() == -1) {
+            DefaultTableModel modelo = (DefaultTableModel) t.getModel();
+            modelo.setNumRows(0);
+            DB db = new DB();
+            ArrayList<Cliente> cl = db.obtenerClientes();
+            for (Cliente c : cl) {
+                String descripcion = c.getNombre().toLowerCase();
+                String busqueda = txtbuscar.getText().toLowerCase();
+                if (descripcion.contains(busqueda)) {
+                    Object[] fila = new Object[6];
+                    fila[0] = c.getId();
+                    fila[1] = c.getNombre();
+                    fila[2] = c.getCuil();
+                    if (c.getTelefono() != 0) { //hago esto por uqe los telefonos vacios se recuperan como un 0
+                        fila[3] = c.getTelefono();
+                    } else {
+                        fila[3] = "";
+                    }
+                    fila[4] = c.getDireccion();
+                    fila[5] = c.getCorreo();
+                    modelo.addRow(fila);
+                }
+
+            }
+        }
+    }
+
+    public static void VaciarBusqueda(JTextField txtbuscar) {
+        txtbuscar.setText("");
+    }
+
     public static void Eliminar(JTable t) {
         int fila = t.getSelectedRow();
         int valor = Integer.parseInt(t.getValueAt(fila, 0).toString());
@@ -106,7 +138,7 @@ public class ControladorCliente {
             modelo.addRow(fila);
         }
     }
-    
+
     public static void AjustarTabla(JTable table) {
         final TableColumnModel columnModel = table.getColumnModel();
         for (int column = 0; column < table.getColumnCount(); column++) {
@@ -163,6 +195,14 @@ public class ControladorCliente {
         txtdireccion.setText(direccion);
         txtcorreo.setText(correo);
     }
+    
+    public static void DesactivarTabla(JTable t) {
+        t.setEnabled(false);
+    }
+    
+    public static void ActivarTabla(JTable t) {
+        t.setEnabled(true);
+    }
 
     public static void ActivarDesactivarBotonGuardar(JButton btnGuardar, JTextField txtNombre, JTextField txtcuil, JTextField txtteleofno, JTextField txtcorreo) {
         /*
@@ -180,9 +220,9 @@ public class ControladorCliente {
         }
     }
 
-    public static void ActivarDesactivarBotonCancelar(JButton btnCancelar, JTextField txtNombre, JTextField txtCuil, JTable t, JTextField txttelefono, JTextField txtdireccion, JTextField txtcorreo) {
+    public static void ActivarDesactivarBotonCancelar(JButton btnCancelar, JTextField txtNombre, JTextField txtCuil, JTable t, JTextField txttelefono, JTextField txtdireccion, JTextField txtcorreo, JTextField txtBuscarCliente) {
         //Metodo que activa el boton cancelar siempre que al menos un text field contenga algun dato.
-        if (!"".equals(txtNombre.getText()) || !"".equals(txtCuil.getText()) || t.getSelectedRow() != -1 || !"".equals(txttelefono.getText()) || !"".equals(txtdireccion.getText()) || !"".equals(txtcorreo.getText())) {
+        if (!"".equals(txtNombre.getText()) || !"".equals(txtCuil.getText()) || t.getSelectedRow() != -1 || !"".equals(txttelefono.getText()) || !"".equals(txtdireccion.getText()) || !"".equals(txtcorreo.getText()) || !"".equals(txtBuscarCliente.getText())) {
             btnCancelar.setEnabled(true);
         } else {
             btnCancelar.setEnabled(false);

@@ -61,13 +61,13 @@ public class ControladorProducto {
         el otro donde no se muestran los uqe estan marcados como ocultos
          */
         DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-        modelo.setColumnCount(0);
+       // modelo.setColumnCount(0);
         modelo.setNumRows(0);
-        modelo.addColumn("Codigo");
+        /*modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio");
-        modelo.addColumn("activo");
+        modelo.addColumn("activo");*/
         DB db = new DB();
         ArrayList<Producto> pl = db.obtenerProductos();
         for (Producto p : pl) {
@@ -102,13 +102,13 @@ public class ControladorProducto {
     public static void ActualizarGrilla(JTable t, JButton b) {
         //este metodo o muestra todo o muestra solo los activos pero no altera nada
         DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-        modelo.setColumnCount(0);
+        //modelo.setColumnCount(0);
         modelo.setNumRows(0);
-        modelo.addColumn("Codigo");
+        /*modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio");
-        modelo.addColumn("activo");
+        modelo.addColumn("activo");*/
         DB db = new DB();
         ArrayList<Producto> pl = db.obtenerProductos();
         if (b.getText() == "Mostrar Inactivos") {
@@ -134,6 +134,45 @@ public class ControladorProducto {
                 modelo.addRow(fila);
             }
         }
+    }
+    
+    public static void BuscarProducto(JTable t, JTextField txtbuscar) {
+        if (t.getSelectedRow() == -1) {
+            DefaultTableModel modelo = (DefaultTableModel) t.getModel();
+            modelo.setNumRows(0);
+            DB db = new DB();
+            ArrayList<Producto> pl = db.obtenerProductos();
+            for (Producto p : pl) {
+                String descripcion = p.getDescripcion().toLowerCase();
+                String busqueda = txtbuscar.getText().toLowerCase();
+                if (descripcion.contains(busqueda)) {
+                    Object[] fila = new Object[5];
+                    fila[0] = p.getCodigo();
+                    fila[1] = p.getDescripcion();
+                    fila[2] = p.getCantidad();
+                    fila[3] = p.getPrecio();
+                    fila[4] = p.isActivo();
+                    modelo.addRow(fila);
+                }
+
+            }
+        }
+    }
+    
+    public static void DesactivarTabla(JTable t) {
+        t.setEnabled(false);
+    }
+    
+    public static void ActivarTabla(JTable t) {
+        t.setEnabled(true);
+    }
+    
+    public static void DesseleccionarFila(JTable t) {
+        t.clearSelection();
+    }
+    
+    public static void VaciarBusqueda(JTextField txtbuscar) {
+        txtbuscar.setText("");
     }
     
     public static void AjustarTabla(JTable table) {
@@ -176,10 +215,6 @@ public class ControladorProducto {
         }
     }
 
-    public static void DesseleccionarFila(JTable t) {
-        t.clearSelection();
-    }
-
     public static void LlenarCampos(JTable t, JTextField txtdescripcion, JTextField txtcantidad, JTextField txtprecio) {
         int fila = t.getSelectedRow();
         String descripcion = t.getValueAt(fila, 1).toString();
@@ -200,9 +235,9 @@ public class ControladorProducto {
 
     }
 
-    public static void ActivarDesactivarBotonCancelar(JButton btnCancelar, JTextField txtDescripcion, JTextField txtCantidad, JTextField txtPrecio, JTable t) {
+    public static void ActivarDesactivarBotonCancelar(JButton btnCancelar, JTextField txtDescripcion, JTextField txtCantidad, JTextField txtPrecio, JTable t, JTextField txtBuscarProducto) {
         //metodo que activa el boton cancelar siempre al menos un campo no este vacio
-        if (!"".equals(txtDescripcion.getText()) || !"".equals(txtCantidad.getText()) || !"".equals(txtPrecio.getText()) || t.getSelectedRow() != -1) {
+        if (!"".equals(txtDescripcion.getText()) || !"".equals(txtCantidad.getText()) || !"".equals(txtPrecio.getText()) || t.getSelectedRow() != -1 || !"".equals(txtBuscarProducto.getText())) {
             btnCancelar.setEnabled(true);
         } else {
             btnCancelar.setEnabled(false);
@@ -319,7 +354,7 @@ public class ControladorProducto {
             @Override
             public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                 try {
-                    if (txtcantidad.getText().length() < 11) {
+                    if (txtcantidad.getText().length() < 6) {
                         String ingreso = text;
                         ingreso = ingreso.replaceAll("\\s", "");
                         ingreso = ingreso.replaceAll("[a-zA-Z]", "");
