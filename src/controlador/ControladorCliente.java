@@ -13,7 +13,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -346,7 +345,7 @@ public class ControladorCliente {
                 }
 
                 if (txtcuil.getText().length() < 11 && txtcuil.getText().length() != 0 || !ValidarCuit(txtcuil.getText())) {
-                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio-Github\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                     lbladvertenciacuil.setIcon(imageIcon);
                     lbladvertenciacuil.setToolTipText("Verifica que el cuil sea valido.");
                 }
@@ -366,7 +365,7 @@ public class ControladorCliente {
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
                 super.remove(fb, offset, length);
                 if (txtcuil.getText().length() < 11 && txtcuil.getText().length() != 0 || !ValidarCuit(txtcuil.getText())) {
-                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio-Github\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                     lbladvertenciacuil.setIcon(imageIcon);
                     lbladvertenciacuil.setToolTipText("Verifica que el cuil sea valido.");
                 }
@@ -397,7 +396,7 @@ public class ControladorCliente {
                 }
 
                 if (txttelefono.getText().length() < 10 && txttelefono.getText().length() != 0) {
-                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio-Github\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                     lbladvertenciatelefono.setIcon(imageIcon);
                     lbladvertenciatelefono.setToolTipText("Verifica que el telefono sea valido.");
                 } else {
@@ -416,7 +415,7 @@ public class ControladorCliente {
             public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
                 super.remove(fb, offset, length);
                 if (txttelefono.getText().length() < 10 && txttelefono.getText().length() != 0) {
-                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                    ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio-Github\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                     lbladvertenciatelefono.setIcon(imageIcon);
                     lbladvertenciatelefono.setToolTipText("Verifica que el telefono sea valido.");
                 } else {
@@ -489,7 +488,7 @@ public class ControladorCliente {
                     lbladvertenciacorreo.setToolTipText(null);
                 } else {
                     if (!valido) {
-                        ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                        ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio-Github\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                         lbladvertenciacorreo.setIcon(imageIcon);
                         lbladvertenciacorreo.setToolTipText("Verifica que el correo sea valido.");
                     } else if ("".equals(txtcorreo.getText())) {
@@ -518,7 +517,7 @@ public class ControladorCliente {
                     lbladvertenciacorreo.setToolTipText(null);
                 } else {
                     if (!valido) {
-                        ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+                        ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio-Github\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                         lbladvertenciacorreo.setIcon(imageIcon);
                         lbladvertenciacorreo.setToolTipText("Verifica que el correo sea valido.");
                     } else if ("".equals(txtcorreo.getText())) {

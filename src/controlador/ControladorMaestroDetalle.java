@@ -28,7 +28,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 

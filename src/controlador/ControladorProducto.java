@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
