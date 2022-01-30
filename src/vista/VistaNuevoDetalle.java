@@ -15,6 +15,9 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         ControladorNuevoDetalle.ActualizarTablaProductos(tablaProductos);
         ControladorNuevoDetalle.IniciarTablaDetalles(tablaDetalles);
         ControladorNuevoDetalle.ActualizarTablaClientes(tablaClientes);
+        ControladorNuevoDetalle.AjustarTabla(tablaProductos);
+        ControladorNuevoDetalle.AjustarTabla(tablaDetalles);
+        ControladorNuevoDetalle.AjustarTabla(tablaClientes);
         ControladorNuevoDetalle.ValidarCantidad(txtCantidad);
     }
 
@@ -73,6 +76,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         menuMaestroDetalle = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(41, 41, 41));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detalle Venta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 36), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -215,12 +219,10 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         txtPreciou.setBorder(null);
         jPanel2.add(txtPreciou, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 100, 30));
 
+        tablaDetalles.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Descripcion", "Cantidad", "Precio unit", "Precio total"
@@ -234,7 +236,10 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaDetalles.setRowHeight(25);
         tablaDetalles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaDetalles.setShowVerticalLines(false);
+        tablaDetalles.getTableHeader().setReorderingAllowed(false);
         tablaDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaDetallesMousePressed(evt);
@@ -242,12 +247,10 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaDetalles);
 
+        tablaProductos.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Descripcion", "Stock", "Precio unit"
@@ -261,7 +264,10 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaProductos.setRowHeight(25);
         tablaProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaProductos.setShowVerticalLines(false);
+        tablaProductos.getTableHeader().setReorderingAllowed(false);
         tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaProductosMousePressed(evt);
@@ -295,12 +301,10 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        tablaClientes.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Descripcion", "Cantidad", "Precio unit", "Precio total"
@@ -314,7 +318,10 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaClientes.setRowHeight(25);
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaClientes.setShowVerticalLines(false);
+        tablaClientes.getTableHeader().setReorderingAllowed(false);
         tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaClientesMousePressed(evt);
@@ -521,9 +528,11 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnQuitar, tablaDetalles);
         ControladorNuevoDetalle.ActivarDesactivarBotonFacturar(btnFacturar, txtIdCliente, tablaClientes);
         ControladorNuevoDetalle.ActualizarTablaProductos(tablaProductos);
-        //
         ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
         ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorNuevoDetalle.AjustarTabla(tablaProductos);
+        ControladorNuevoDetalle.AjustarTabla(tablaDetalles);
+        ControladorNuevoDetalle.AjustarTabla(tablaClientes);
     }//GEN-LAST:event_btnFacturarActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
@@ -532,6 +541,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnQuitar, tablaDetalles);
         ControladorNuevoDetalle.ActivarDesactivarBotonFacturar(btnFacturar, txtIdCliente, tablaDetalles);
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnCancelar, tablaProductos);
+        ControladorNuevoDetalle.AjustarTabla(tablaDetalles);
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
@@ -542,6 +552,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnAñadir, tablaProductos);
         ControladorNuevoDetalle.ActivarDesactivarBotonFacturar(btnFacturar, txtIdCliente, tablaDetalles);
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnCancelar, tablaProductos);
+        ControladorNuevoDetalle.AjustarTabla(tablaDetalles);
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnCancelarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCompraActionPerformed
@@ -556,9 +567,10 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnQuitar, tablaDetalles);
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnCancelar, tablaProductos);
         ControladorNuevoDetalle.ActivarDesactivarBotonFacturar(btnFacturar, txtIdCliente, tablaDetalles);
-        //
         ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
         ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+        ControladorNuevoDetalle.AjustarTabla(tablaDetalles);
+        ControladorNuevoDetalle.AjustarTabla(tablaClientes);
     }//GEN-LAST:event_btnCancelarCompraActionPerformed
 
     private void lblLimpiarBusquedaProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLimpiarBusquedaProductoMouseClicked

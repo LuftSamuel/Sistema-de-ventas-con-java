@@ -12,7 +12,7 @@ public class VistaCliente extends javax.swing.JFrame {
     public VistaCliente() {
         initComponents();
         ControladorCliente.ActualizarGrilla(tablaClientes);
-        //02/01
+        ControladorCliente.AjustarTabla(tablaClientes);
         ControladorCliente.ValidarNombre(txtNombre);
         ControladorCliente.ValidarCuil(txtCuil, lblAdvertenciaCuil);        
         ControladorCliente.ValidarTelefono(txtTelefono, lblAdvertenciaTelefono);
@@ -55,6 +55,9 @@ public class VistaCliente extends javax.swing.JFrame {
         txtCuil = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        txtBuscarCliente = new javax.swing.JTextField();
+        lblLimpiarBusquedaCliente = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuNuevoDetalle = new javax.swing.JMenuItem();
@@ -207,18 +210,27 @@ public class VistaCliente extends javax.swing.JFrame {
         });
         jPanel2.add(txtCuil, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 170, 30));
 
+        tablaClientes.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
+                "ID", "Nombre", "Cuil", "Telefono", "Direccion", "Correo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaClientes.setRowHeight(25);
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaClientes.setShowVerticalLines(false);
+        tablaClientes.getTableHeader().setReorderingAllowed(false);
         tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaClientesMousePressed(evt);
@@ -226,8 +238,33 @@ public class VistaCliente extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tablaClientes);
         if (tablaClientes.getColumnModel().getColumnCount() > 0) {
-            tablaClientes.getColumnModel().getColumn(0).setPreferredWidth(15);
+            tablaClientes.getColumnModel().getColumn(2).setMinWidth(80);
+            tablaClientes.getColumnModel().getColumn(2).setMaxWidth(80);
+            tablaClientes.getColumnModel().getColumn(3).setMinWidth(75);
+            tablaClientes.getColumnModel().getColumn(3).setMaxWidth(75);
         }
+
+        jLabel9.setFont(new java.awt.Font("Source Serif Pro Semibold", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("Buscar cliente");
+
+        txtBuscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarClienteKeyReleased(evt);
+            }
+        });
+
+        lblLimpiarBusquedaCliente.setFont(new java.awt.Font("Source Code Pro Semibold", 1, 18)); // NOI18N
+        lblLimpiarBusquedaCliente.setForeground(new java.awt.Color(255, 255, 255));
+        lblLimpiarBusquedaCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLimpiarBusquedaCliente.setText("X");
+        lblLimpiarBusquedaCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        lblLimpiarBusquedaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLimpiarBusquedaClienteMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -236,17 +273,31 @@ public class VistaCliente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLimpiarBusquedaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(lblLimpiarBusquedaCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -299,6 +350,7 @@ public class VistaCliente extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         ControladorCliente.AgregarModificar(tablaClientes, txtNombre.getText(), Long.parseLong(txtCuil.getText()), txtTelefono.getText(), txtDireccion.getText(), txtCorreo.getText());
         ControladorCliente.ActualizarGrilla(tablaClientes);
+        ControladorCliente.AjustarTabla(tablaClientes);
         ControladorCliente.LimpiarCampos(txtNombre, txtCuil, txtTelefono, txtDireccion, txtCorreo);
         ControladorCliente.DesactivarBoton(btnGuardar);
         ControladorCliente.DesactivarBoton(btnEliminar);
@@ -310,6 +362,7 @@ public class VistaCliente extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         ControladorCliente.Eliminar(tablaClientes);
         ControladorCliente.ActualizarGrilla(tablaClientes);
+        ControladorCliente.AjustarTabla(tablaClientes);
         ControladorCliente.LimpiarCampos(txtNombre, txtCuil, txtTelefono, txtDireccion, txtCorreo);
         ControladorCliente.DesactivarBoton(btnGuardar);
         ControladorCliente.DesactivarBoton(btnEliminar);
@@ -377,6 +430,15 @@ public class VistaCliente extends javax.swing.JFrame {
         ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo);
     }//GEN-LAST:event_txtCuilKeyReleased
 
+    private void txtBuscarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClienteKeyReleased
+        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+    }//GEN-LAST:event_txtBuscarClienteKeyReleased
+
+    private void lblLimpiarBusquedaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLimpiarBusquedaClienteMouseClicked
+        //ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
+        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+    }//GEN-LAST:event_lblLimpiarBusquedaClienteMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -422,6 +484,7 @@ public class VistaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -435,10 +498,12 @@ public class VistaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblAdvertenciaCorreo;
     private javax.swing.JLabel lblAdvertenciaCuil;
     private javax.swing.JLabel lblAdvertenciaTelefono;
+    private javax.swing.JLabel lblLimpiarBusquedaCliente;
     private javax.swing.JMenuItem menuMaestroDetalle;
     private javax.swing.JMenuItem menuNuevoDetalle;
     private javax.swing.JMenuItem menuProductos;
     private javax.swing.JTable tablaClientes;
+    private javax.swing.JTextField txtBuscarCliente;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtCuil;
     private javax.swing.JTextField txtDireccion;

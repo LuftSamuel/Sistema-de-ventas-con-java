@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.DB;
@@ -11,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -20,7 +23,7 @@ import vista.VistaMaestroDetalle;
 import vista.VistaNuevoDetalle;
 import vista.VistaProducto;
 
-public class ControladorProducto {
+public class ControladorProducto {    
 
     public static void AgregarModificar(JTable t, String descripcion, int cantidad, int precio) {
         //este if else es para ver si inserta o modifica
@@ -130,6 +133,22 @@ public class ControladorProducto {
                 fila[4] = p.isActivo();
                 modelo.addRow(fila);
             }
+        }
+    }
+    
+    public static void AjustarTabla(JTable table) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 15; // Min width
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width + 1, width);
+            }
+            if (width > 300) {
+                width = 300;
+            }
+            columnModel.getColumn(column).setPreferredWidth(width);
         }
     }
 

@@ -1,5 +1,6 @@
 package controlador;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -11,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -76,14 +80,15 @@ public class ControladorCliente {
 
     public static void ActualizarGrilla(JTable t) {
         DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-        modelo.setColumnCount(0);
         modelo.setNumRows(0);
+        /*
+        modelo.setColumnCount(0);       
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Cuil");
         modelo.addColumn("Telefono");
         modelo.addColumn("Direccion");
-        modelo.addColumn("Correo");
+        modelo.addColumn("Correo");*/
         DB db = new DB();
         ArrayList<Cliente> cl = db.obtenerClientes();
         for (Cliente c : cl) {
@@ -99,6 +104,22 @@ public class ControladorCliente {
             fila[4] = c.getDireccion();
             fila[5] = c.getCorreo();
             modelo.addRow(fila);
+        }
+    }
+    
+    public static void AjustarTabla(JTable table) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 15; // Min width
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width + 1, width);
+            }
+            if (width > 300) {
+                width = 300;
+            }
+            columnModel.getColumn(column).setPreferredWidth(width);
         }
     }
 

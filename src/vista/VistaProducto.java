@@ -1,7 +1,6 @@
 package vista;
 
 import controlador.ControladorProducto;
-import javax.swing.table.DefaultTableModel;
 
 public class VistaProducto extends javax.swing.JFrame {
 
@@ -11,6 +10,7 @@ public class VistaProducto extends javax.swing.JFrame {
     public VistaProducto() {
         initComponents();
         ControladorProducto.ActualizarGrilla(tablaProductos, btnVerOcultarTodos);
+        ControladorProducto.AjustarTabla(tablaProductos);
         ControladorProducto.ValidarDescripcion(txtDescripcion);
         ControladorProducto.ValidarEntero(txtCantidad);
         ControladorProducto.ValidarEntero(txtPrecio);
@@ -47,6 +47,9 @@ public class VistaProducto extends javax.swing.JFrame {
         btnVerOcultarTodos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        txtBuscarCliente = new javax.swing.JTextField();
+        lblLimpiarBusquedaCliente = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuClientes = new javax.swing.JMenuItem();
@@ -60,6 +63,7 @@ public class VistaProducto extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(41, 41, 41));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 36), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -176,24 +180,50 @@ public class VistaProducto extends javax.swing.JFrame {
         });
         jPanel2.add(btnVerOcultarTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 130, -1));
 
+        tablaProductos.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        tablaProductos.setRowHeight(25);
         tablaProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaProductos.setShowVerticalLines(false);
+        tablaProductos.getTableHeader().setReorderingAllowed(false);
         tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaProductosMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tablaProductos);
+
+        jLabel9.setFont(new java.awt.Font("Source Serif Pro Semibold", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel9.setText("Buscar producto");
+
+        txtBuscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarClienteKeyReleased(evt);
+            }
+        });
+
+        lblLimpiarBusquedaCliente.setFont(new java.awt.Font("Source Code Pro Semibold", 1, 18)); // NOI18N
+        lblLimpiarBusquedaCliente.setForeground(new java.awt.Color(255, 255, 255));
+        lblLimpiarBusquedaCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLimpiarBusquedaCliente.setText("X");
+        lblLimpiarBusquedaCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
+        lblLimpiarBusquedaCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLimpiarBusquedaClienteMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -202,9 +232,16 @@ public class VistaProducto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblLimpiarBusquedaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,11 +249,14 @@ public class VistaProducto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 85, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(lblLimpiarBusquedaCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jMenu3.setText("Menu");
@@ -266,6 +306,7 @@ public class VistaProducto extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         ControladorProducto.AgregarModificar(tablaProductos, txtDescripcion.getText(), Integer.parseInt(txtCantidad.getText()), Integer.parseInt(txtPrecio.getText()));
         ControladorProducto.ActualizarGrilla(tablaProductos, btnVerOcultarTodos);
+        ControladorProducto.AjustarTabla(tablaProductos);
         ControladorProducto.LimpiarCampos(txtDescripcion, txtCantidad, txtPrecio);
         ControladorProducto.DesactivarBoton(btnGuardar);
         ControladorProducto.DesactivarBoton(btnEliminar);
@@ -276,6 +317,7 @@ public class VistaProducto extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         ControladorProducto.Eliminar(tablaProductos);
         ControladorProducto.ActualizarGrilla(tablaProductos, btnVerOcultarTodos);
+        ControladorProducto.AjustarTabla(tablaProductos);
         ControladorProducto.LimpiarCampos(txtDescripcion, txtCantidad, txtPrecio);
         ControladorProducto.DesactivarBoton(btnGuardar);
         ControladorProducto.DesactivarBoton(btnEliminar);
@@ -336,6 +378,7 @@ public class VistaProducto extends javax.swing.JFrame {
     private void btnActivarDesactivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActivarDesactivarActionPerformed
         ControladorProducto.ActivarDesactivarProducto(tablaProductos);
         ControladorProducto.ActualizarGrilla(tablaProductos, btnVerOcultarTodos);
+        ControladorProducto.AjustarTabla(tablaProductos);
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);       
         //todo lo que esta en el boton cancelar
         ControladorProducto.DesseleccionarFila(tablaProductos);
@@ -348,6 +391,7 @@ public class VistaProducto extends javax.swing.JFrame {
 
     private void btnVerOcultarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerOcultarTodosActionPerformed
         ControladorProducto.VerOcultarTodos(tablaProductos, btnVerOcultarTodos);
+        ControladorProducto.AjustarTabla(tablaProductos);
         ControladorProducto.LimpiarCampos(txtDescripcion, txtCantidad, txtPrecio);
         ControladorProducto.DesactivarBoton(btnGuardar);
         ControladorProducto.DesactivarBoton(btnEliminar);
@@ -355,6 +399,15 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
     }//GEN-LAST:event_btnVerOcultarTodosActionPerformed
+
+    private void txtBuscarClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClienteKeyReleased
+        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+    }//GEN-LAST:event_txtBuscarClienteKeyReleased
+
+    private void lblLimpiarBusquedaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLimpiarBusquedaClienteMouseClicked
+        //ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
+        //ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
+    }//GEN-LAST:event_lblLimpiarBusquedaClienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -401,6 +454,7 @@ public class VistaProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -412,10 +466,12 @@ public class VistaProducto extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblLimpiarBusquedaCliente;
     private javax.swing.JMenuItem menuClientes;
     private javax.swing.JMenuItem menuMaestroDetalle;
     private javax.swing.JMenuItem menuNuevoDetalle;
     private javax.swing.JTable tablaProductos;
+    private javax.swing.JTextField txtBuscarCliente;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecio;

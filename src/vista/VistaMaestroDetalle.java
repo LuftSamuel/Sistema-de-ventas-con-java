@@ -36,22 +36,24 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(41, 41, 41));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Maestro Detalle", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 36), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel1.setForeground(new java.awt.Color(255, 0, 0));
 
+        tablaCompra.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaCompra.setRowHeight(25);
+        tablaCompra.setShowVerticalLines(false);
+        tablaCompra.getTableHeader().setReorderingAllowed(false);
         tablaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaCompraMousePressed(evt);
@@ -59,17 +61,18 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaCompra);
 
+        tablaDetalle.setFont(new java.awt.Font("Source Serif Pro", 0, 12)); // NOI18N
         tablaDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaDetalle.setRowHeight(25);
+        tablaDetalle.setShowVerticalLines(false);
+        tablaDetalle.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaDetalle);
 
         btnCrearFactura.setText("Crear Factura");
