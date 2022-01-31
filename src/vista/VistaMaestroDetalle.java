@@ -29,6 +29,7 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaDetalle = new javax.swing.JTable();
         btnCrearFactura = new javax.swing.JButton();
+        txtCambiarRuta = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -83,6 +84,13 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
             }
         });
 
+        txtCambiarRuta.setText("Cambiar Ruta");
+        txtCambiarRuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCambiarRutaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -97,6 +105,8 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btnCrearFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCambiarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -108,7 +118,9 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
-                .addComponent(btnCrearFactura)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearFactura)
+                    .addComponent(txtCambiarRuta))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -185,6 +197,10 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         ControladorMaestroDetalle.ActivarDesactivarBotonCrearFactura(tablaCompra, btnCrearFactura);
     }//GEN-LAST:event_btnCrearFacturaActionPerformed
 
+    private void txtCambiarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarRutaActionPerformed
+       ControladorMaestroDetalle.CambiarRuta();
+    }//GEN-LAST:event_txtCambiarRutaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,5 +248,6 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaCompra;
     private javax.swing.JTable tablaDetalle;
+    private javax.swing.JButton txtCambiarRuta;
     // End of variables declaration//GEN-END:variables
 }

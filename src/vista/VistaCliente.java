@@ -381,14 +381,21 @@ public class VistaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyReleased
 
     private void tablaClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMousePressed
+        /* La funcion ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes)
+        debe ir arriba de la funcion de LlenarCampos, en el document filter
+        se evalua que el cuil ingresado en el txtcuil no exista, pero al
+        seleccionar un registro de la tabla estoy evaluando con un cuil ya cargado,
+        para eso puse en el document filter la condicion extra de que para que
+        se muestre la advertencia de cuil existente, el cuil debe existir y tambien
+        debe estar activo el txtcuil (solo esta activo cuando se ingresa un nuevo registro)
+        */
         ControladorCliente.ActivarDesactivarTxt(txtNombre, tablaClientes);
         ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes);
-        ControladorCliente.LimpiarCampos(txtNombre, txtCuil, txtTelefono, txtDireccion, txtCorreo);
+        ControladorCliente.LimpiarCampos(txtNombre, txtCuil, txtTelefono, txtDireccion, txtCorreo);        
         ControladorCliente.LlenarCampos(tablaClientes, txtNombre, txtCuil, txtTelefono, txtDireccion, txtCorreo);
-        ControladorCliente.ActivarBoton(btnEliminar);
-        ControladorCliente.ActivarBoton(btnCancelar);
-        
-        ControladorCliente.DesactivarTabla(tablaClientes);
+        ControladorCliente.ActivarBoton(btnEliminar);        
+        ControladorCliente.ActivarBoton(btnCancelar);   
+        ControladorCliente.DesactivarTabla(tablaClientes);        
     }//GEN-LAST:event_tablaClientesMousePressed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

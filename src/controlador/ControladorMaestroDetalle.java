@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
@@ -49,8 +50,8 @@ public class ControladorMaestroDetalle {
             fila[0] = c.getNum_compra();
             fila[1] = c.getFecha();
             fila[2] = c.getCod_cliente();
-            for(Cliente cli : clie){
-                if(cli.getId() == c.getCod_cliente()){
+            for (Cliente cli : clie) {
+                if (cli.getId() == c.getCod_cliente()) {
                     fila[3] = cli.getNombre();
                     fila[4] = cli.getCuil();
                 }
@@ -93,7 +94,7 @@ public class ControladorMaestroDetalle {
             t.addRow(fila);
         }
     }
-    
+
     public static void AjustarTabla(JTable table) {
         final TableColumnModel columnModel = table.getColumnModel();
         for (int column = 0; column < table.getColumnCount(); column++) {
@@ -109,28 +110,33 @@ public class ControladorMaestroDetalle {
             columnModel.getColumn(column).setPreferredWidth(width);
         }
     }
-    
-    public static void CrearPDF(JTable t, JTable s){
+
+    public static void CrearPDF(JTable t, JTable s) {
+        DB db = new DB();
+        String dir = db.obtenerDirectorio();
+
+        //t tabla compra, s tabla detalle
+        //obtengo la fila seleccionada de la tabla compra
         int fila = t.getSelectedRow();
+        //de esa fila obtengo numero de factura, fecha y comprador
         String nFac = t.getValueAt(fila, 0).toString();
         String fecha = t.getValueAt(fila, 1).toString();
         fecha = fecha.replace('-', '.');
         fecha = fecha.replace(':', '.');
         String comprador = t.getValueAt(fila, 3).toString();
-        
         try {
             //antes de convertir a la fecha en parte del titulo la tengo que formatear, creo que por los guiones
-            File file = new File(nFac+comprador+fecha+".pdf");
-            //File file = new File("asd.pdf");
-            PdfWriter pdfWriter = new PdfWriter(file); 
-            PdfDocument pdfDocument = new PdfDocument(pdfWriter); 
+            File file = new File(dir + "\\" + nFac + comprador + fecha + ".pdf");
+
+            PdfWriter pdfWriter = new PdfWriter(file);
+            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
             pdfDocument.setDefaultPageSize(PageSize.A4); //21.5 x 28 cm?, sino a1 a2 a3
- 
+
             float col = 280f;
             float columnWidth[] = {col, col};
-            Table datosEmpresa = new Table(columnWidth);            
-            
+            Table datosEmpresa = new Table(columnWidth);
+
             datosEmpresa.addCell(new Cell().add(new Paragraph("FACTURA"))
                     .setTextAlignment(TextAlignment.CENTER)
                     .setVerticalAlignment(VerticalAlignment.MIDDLE)
@@ -139,121 +145,119 @@ public class ControladorMaestroDetalle {
                     .setFontSize(30f)
                     .setBorder(Border.NO_BORDER)
             );
-            
+
             datosEmpresa.addCell(new Cell().add(new Paragraph("C.U.I.T.:xx-xxxxxxxx-x\nIngresos Brutos C.M.:xxx-xxxxxx-x\nINICIO DE ACTIVIDADES: MES 20XX"))
                     .setTextAlignment(TextAlignment.RIGHT)
                     .setMarginTop(30f)
                     .setMarginBottom(30f)
                     .setMarginRight(10f)
                     .setBorder(Border.NO_BORDER)
-            ); 
-            
+            );
+
             document.add(datosEmpresa);
-            
+
             //separador
             document.add(new Paragraph("\n"));
-            
+
             float columnWidth2[] = {80, 300, 100, 80};
             Table datosCliente = new Table(columnWidth2);
-            
+
             datosCliente.addCell(new Cell(0, 4).add(new Paragraph("Datos del cliente"))
                     .setBold()
                     .setBorder(Border.NO_BORDER)
             );
-            
+
             //primer parametro filas de ancho, segundo parametro columnas de ancho
-            datosCliente.addCell(new Cell(1 ,1).add(new Paragraph("Nombre")).setBorder(Border.NO_BORDER));
-            datosCliente.addCell(new Cell(1 ,1).add(new Paragraph(t.getValueAt(fila, 3).toString())).setBorder(Border.NO_BORDER));           
-            datosCliente.addCell(new Cell(1 ,1).add(new Paragraph("Numero Factura")).setBorder(Border.NO_BORDER));
-            datosCliente.addCell(new Cell(1 ,1).add(new Paragraph(t.getValueAt(fila, 0).toString())).setBorder(Border.NO_BORDER));
-            
+            datosCliente.addCell(new Cell(1, 1).add(new Paragraph("Nombre")).setBorder(Border.NO_BORDER));
+            datosCliente.addCell(new Cell(1, 1).add(new Paragraph(t.getValueAt(fila, 3).toString())).setBorder(Border.NO_BORDER));
+            datosCliente.addCell(new Cell(1, 1).add(new Paragraph("Numero Factura")).setBorder(Border.NO_BORDER));
+            datosCliente.addCell(new Cell(1, 1).add(new Paragraph(t.getValueAt(fila, 0).toString())).setBorder(Border.NO_BORDER));
+
             String cuil = t.getValueAt(fila, 4).toString();
             cuil = cuil.substring(0, 2) + "-" + cuil.substring(2, 10) + "-" + cuil.substring(10, 11);
-            
-            datosCliente.addCell(new Cell(0 ,1).add(new Paragraph("Cuil num")).setBorder(Border.NO_BORDER));
-            datosCliente.addCell(new Cell(0 ,1).add(new Paragraph(cuil)).setBorder(Border.NO_BORDER));
-            datosCliente.addCell(new Cell(0 ,1).add(new Paragraph("Fecha")).setBorder(Border.NO_BORDER));            
+
+            datosCliente.addCell(new Cell(0, 1).add(new Paragraph("Cuil num")).setBorder(Border.NO_BORDER));
+            datosCliente.addCell(new Cell(0, 1).add(new Paragraph(cuil)).setBorder(Border.NO_BORDER));
+            datosCliente.addCell(new Cell(0, 1).add(new Paragraph("Fecha")).setBorder(Border.NO_BORDER));
             //aca le quito a la fecha las horas minutos y segundos y despues recien la agrego
             String sFecha = t.getValueAt(fila, 1).toString();
-            sFecha = sFecha.substring(0, sFecha.length() - 9);            
-            datosCliente.addCell(new Cell(0 ,1).add(new Paragraph(sFecha)).setBorder(Border.NO_BORDER));
-            
-            document.add(datosCliente);         
-            
+            sFecha = sFecha.substring(0, sFecha.length() - 9);
+            datosCliente.addCell(new Cell(0, 1).add(new Paragraph(sFecha)).setBorder(Border.NO_BORDER));
+
+            document.add(datosCliente);
+
             //separador
             document.add(new Paragraph("\n"));
-            
+
             float columnWidth3[] = {320, 80, 80, 80};
             Table datosProductos = new Table(columnWidth3);
-            
+
             datosProductos.addCell(new Cell(1, 1).add(new Paragraph("Descripcion")).setBorder(Border.NO_BORDER));
             datosProductos.addCell(new Cell(1, 1).add(new Paragraph("Cantidad")).setBorder(Border.NO_BORDER));
             datosProductos.addCell(new Cell(1, 1).add(new Paragraph("Precio u")).setBorder(Border.NO_BORDER));
             datosProductos.addCell(new Cell(1, 1).add(new Paragraph("Precio t")).setBorder(Border.NO_BORDER));
-            
+
             document.add(datosProductos);
-            
+
             //separador
             document.add(new Paragraph("\n"));
-            
+
             Table detalleProductos = new Table(columnWidth3);
-            
+
             int total = 0;
-            
-            for(int i=0; i < s.getRowCount(); i++){
+
+            for (int i = 0; i < s.getRowCount(); i++) {
                 detalleProductos.addCell(new Cell(1, 1).add(new Paragraph(s.getValueAt(i, 1).toString())).setBorder(Border.NO_BORDER));
                 detalleProductos.addCell(new Cell(1, 1).add(new Paragraph(s.getValueAt(i, 2).toString())).setBorder(Border.NO_BORDER));
                 detalleProductos.addCell(new Cell(1, 1).add(new Paragraph(s.getValueAt(i, 3).toString())).setBorder(Border.NO_BORDER));
-                detalleProductos.addCell(new Cell(1, 1).add(new Paragraph(s.getValueAt(i, 4).toString())).setBorder(Border.NO_BORDER));    
+                detalleProductos.addCell(new Cell(1, 1).add(new Paragraph(s.getValueAt(i, 4).toString())).setBorder(Border.NO_BORDER));
                 total = total + Integer.parseInt(s.getValueAt(i, 4).toString());
             }
-            
+
             detalleProductos.addCell(new Cell(1, 1).add(new Paragraph()).setBorder(Border.NO_BORDER));
-            detalleProductos.addCell(new Cell(1, 1).add(new Paragraph()).setBorder(Border.NO_BORDER));    
-            detalleProductos.addCell(new Cell(1, 1).add(new Paragraph()).setBorder(Border.NO_BORDER));    
+            detalleProductos.addCell(new Cell(1, 1).add(new Paragraph()).setBorder(Border.NO_BORDER));
+            detalleProductos.addCell(new Cell(1, 1).add(new Paragraph()).setBorder(Border.NO_BORDER));
             detalleProductos.addCell(new Cell(1, 4).add(new Paragraph(String.valueOf(total))).setBorder(Border.NO_BORDER).setBold());
             document.add(detalleProductos);
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            document.close(); 
+
+            document.close();
             pdfWriter.close();
- 
-            
-            
-            
-            
-            
-            
+
         } catch (FileNotFoundException ex) {
             System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    
-    public static void ActivarDesactivarBotonCrearFactura(JTable t, JButton b){
-        if(t.getSelectedRow() != -1){
+
+    public static void ActivarDesactivarBotonCrearFactura(JTable t, JButton b) {
+        if (t.getSelectedRow() != -1) {
             b.setEnabled(true);
-        }else{
+        } else {
             b.setEnabled(false);
         }
     }
 
-    public static void DesseleccionarFila(JTable t){
+    public static void DesseleccionarFila(JTable t) {
         t.clearSelection();
     }
-    
+
+    public static void CambiarRuta() {
+        //funcion para cambiar la ruta donde se guardan las facturas en pdf
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new java.io.File(".")); // start at application current directory
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int returnVal = fc.showSaveDialog(null);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            //la ruta solo se guarda si el usuario aprea aceptar
+            File dir = fc.getSelectedFile();
+            DB db = new DB();
+            db.cambiarDirectorio(dir.toString());
+        }
+
+    }
+
     public static void NuevaVista() {
         VistaMaestroDetalle vmd = new VistaMaestroDetalle();
         vmd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
