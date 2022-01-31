@@ -381,12 +381,13 @@ public class VistaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyReleased
 
     private void tablaClientesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaClientesMousePressed
+        ControladorCliente.ActivarDesactivarTxt(txtNombre, tablaClientes);
+        ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes);
         ControladorCliente.LimpiarCampos(txtNombre, txtCuil, txtTelefono, txtDireccion, txtCorreo);
         ControladorCliente.LlenarCampos(tablaClientes, txtNombre, txtCuil, txtTelefono, txtDireccion, txtCorreo);
         ControladorCliente.ActivarBoton(btnEliminar);
         ControladorCliente.ActivarBoton(btnCancelar);
-        ControladorCliente.ActivarDesactivarTxt(txtNombre, tablaClientes);
-        ControladorCliente.ActivarDesactivarTxt(txtCuil, tablaClientes);
+        
         ControladorCliente.DesactivarTabla(tablaClientes);
     }//GEN-LAST:event_tablaClientesMousePressed
 

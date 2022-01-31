@@ -194,11 +194,11 @@ public class ControladorCliente {
         txtdireccion.setText(direccion);
         txtcorreo.setText(correo);
     }
-    
+
     public static void DesactivarTabla(JTable t) {
         t.setEnabled(false);
     }
-    
+
     public static void ActivarTabla(JTable t) {
         t.setEnabled(true);
     }
@@ -211,8 +211,15 @@ public class ControladorCliente {
          */
         EmailValidator validator = EmailValidator.getInstance();
         boolean valido = validator.isValid(txtcorreo.getText());
-
-        if (!"".equals(txtNombre.getText()) && ValidarCuit(txtcuil.getText()) && (txtteleofno.getText().length() == 0 || txtteleofno.getText().length() == 10) && ("".equals(txtcorreo.getText()) || valido)) {
+        //////////////
+        int flag;
+        if (!"".equals(txtcuil.getText())) {
+            flag = CuilUnico(Long.parseLong(txtcuil.getText()));
+        } else {
+            flag = 1;
+        }
+        //////////////
+        if (!"".equals(txtNombre.getText()) && ValidarCuit(txtcuil.getText()) && (txtteleofno.getText().length() == 0 || txtteleofno.getText().length() == 10) && ("".equals(txtcorreo.getText()) || valido) && flag == 0) {
             btnGuardar.setEnabled(true);
         } else {
             btnGuardar.setEnabled(false);
@@ -276,6 +283,19 @@ public class ControladorCliente {
         vmd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         vmd.setLocationRelativeTo(null);
         vmd.setVisible(true);
+    }
+
+    public static int CuilUnico(long cuil) {
+        DB db = new DB();
+        int flag = 0;
+        ArrayList<Cliente> cli = db.obtenerClientes();
+        for (Cliente cl : cli) {
+            long busqueda = cl.getCuil();
+            if (busqueda == cuil) {
+                flag = 1;
+            }
+        }
+        return flag;
     }
 
     public static void ValidarNombre(JTextField txtnombre) {
@@ -344,12 +364,32 @@ public class ControladorCliente {
                     fb.insertString(offset, ingreso, attrs);
                 }
 
-                if (txtcuil.getText().length() < 11 && txtcuil.getText().length() != 0 || !ValidarCuit(txtcuil.getText())) {
+                //0 cuil inexistente
+                //1 cuil ya existe
+                //2 esta vacio
+                int flag;
+                if (!"".equals(txtcuil.getText())) {
+                    flag = CuilUnico(Long.parseLong(txtcuil.getText()));
+                } else {
+                    flag = 2;
+                }
+                
+                //flag == 1 && txtcuil.isEnabled()
+                /*
+                La segunda condicion es para evitar que se muestre la advertencia de cuil existente
+                cuando selecciono un registro ya cargado en la tabla
+                */
+                if (txtcuil.getText().length() < 11 && txtcuil.getText().length() != 0 || !ValidarCuit(txtcuil.getText()) || flag == 1 && txtcuil.isEnabled()) {
                     ImageIcon imageIcon = new ImageIcon(new ImageIcon("C:\\\\Users\\\\Desktop\\\\Desktop\\\\iaes\\\\IAES 2020\\\\Programacion II\\\\AplicacionVentasEscritorio-Github\\\\src\\\\img\\\\warning.png").getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
                     lbladvertenciacuil.setIcon(imageIcon);
-                    lbladvertenciacuil.setToolTipText("Verifica que el cuil sea valido.");
+                    if (flag == 0) {
+                        lbladvertenciacuil.setToolTipText("Verifica que el cuil sea valido.");
+                    } else {
+                        lbladvertenciacuil.setToolTipText("Ese cuil ya existe en la base de datos.");
+                    }
+
                 }
-                if (txtcuil.getText().length() == 0 || ValidarCuit(txtcuil.getText())) {
+                if (txtcuil.getText().length() == 0 || ValidarCuit(txtcuil.getText()) && flag == 0) {
                     lbladvertenciacuil.setIcon(null);
                     lbladvertenciacuil.setToolTipText(null);
                 }
