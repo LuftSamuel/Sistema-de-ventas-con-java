@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args){
     //https://astares.blogspot.com/2011/08/java-and-late-file-dialog-instantiation.html
         
-    ControladorCliente.NuevaVista();
+    ControladorProducto.NuevaVista();
     
  }  
 }

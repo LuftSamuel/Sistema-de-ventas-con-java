@@ -188,7 +188,7 @@ public class DB {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ventasonline", user, pass);
             PreparedStatement sql = con.prepareStatement("UPDATE producto SET activo = ? WHERE codigo = ? ");
             sql.setBoolean(1, p.isActivo());
-            sql.setInt(2, p.getCodigo());
+            sql.setInt(2, p.getCodigo());            
             sql.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());

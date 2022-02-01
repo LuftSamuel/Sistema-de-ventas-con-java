@@ -22,7 +22,7 @@ import vista.VistaMaestroDetalle;
 import vista.VistaNuevoDetalle;
 import vista.VistaProducto;
 
-public class ControladorProducto {    
+public class ControladorProducto {
 
     public static void AgregarModificar(JTable t, String descripcion, int cantidad, int precio) {
         //este if else es para ver si inserta o modifica
@@ -60,7 +60,7 @@ public class ControladorProducto {
         el otro donde no se muestran los uqe estan marcados como ocultos
          */
         DefaultTableModel modelo = (DefaultTableModel) t.getModel();
-       // modelo.setColumnCount(0);
+        //modelo.setColumnCount(0);
         modelo.setNumRows(0);
         /*modelo.addColumn("Codigo");
         modelo.addColumn("Descripcion");
@@ -135,7 +135,7 @@ public class ControladorProducto {
         }
     }
     
-    public static void BuscarProducto(JTable t, JTextField txtbuscar) {
+    public static void BuscarProducto(JTable t, JTextField txtbuscar, JButton btnVerOcultarTodos) {
         if (t.getSelectedRow() == -1) {
             DefaultTableModel modelo = (DefaultTableModel) t.getModel();
             modelo.setNumRows(0);
@@ -151,29 +151,39 @@ public class ControladorProducto {
                     fila[2] = p.getCantidad();
                     fila[3] = p.getPrecio();
                     fila[4] = p.isActivo();
-                    modelo.addRow(fila);
+                    //0 es inactivo
+                    //Si el boton dice Mostrar Inactivos es por que en ese momento estan ocultos
+                    //entonces si estan ocultos (los inactivos) y el objeto en el que estoy iterando
+                    //esta activo lo muestro, en el else se muestran todos 
+                    if("Mostrar Inactivos".equals(btnVerOcultarTodos.getText())){
+                        if(p.isActivo()){
+                            modelo.addRow(fila);
+                        }
+                    }else{
+                        modelo.addRow(fila);
+                    }
                 }
 
             }
         }
     }
-    
+
     public static void DesactivarTabla(JTable t) {
         t.setEnabled(false);
     }
-    
+
     public static void ActivarTabla(JTable t) {
         t.setEnabled(true);
     }
-    
+
     public static void DesseleccionarFila(JTable t) {
         t.clearSelection();
     }
-    
+
     public static void VaciarBusqueda(JTextField txtbuscar) {
         txtbuscar.setText("");
     }
-    
+
     public static void AjustarTabla(JTable table) {
         final TableColumnModel columnModel = table.getColumnModel();
         for (int column = 0; column < table.getColumnCount(); column++) {
@@ -216,12 +226,17 @@ public class ControladorProducto {
 
     public static void LlenarCampos(JTable t, JTextField txtdescripcion, JTextField txtcantidad, JTextField txtprecio) {
         int fila = t.getSelectedRow();
-        String descripcion = t.getValueAt(fila, 1).toString();
-        String cantidad = t.getValueAt(fila, 2).toString();
-        String precio = t.getValueAt(fila, 3).toString();
-        txtdescripcion.setText(descripcion);
-        txtcantidad.setText(cantidad);
-        txtprecio.setText(precio);
+        try {
+            String descripcion = t.getValueAt(fila, 1).toString();
+            String cantidad = t.getValueAt(fila, 2).toString();
+            String precio = t.getValueAt(fila, 3).toString();
+            txtdescripcion.setText(descripcion);
+            txtcantidad.setText(cantidad);
+            txtprecio.setText(precio);
+        } catch (Exception e) {
+            System.out.println("LlenarCampos ->" + e.getMessage());
+        }
+
     }
 
     public static void ActivarDesactivarBotonGuardar(JButton btnGuardar, JTextField txtDescripcion, JTextField txtCantidad, JTextField txtPrecio) {

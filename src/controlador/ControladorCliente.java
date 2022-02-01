@@ -203,7 +203,7 @@ public class ControladorCliente {
         t.setEnabled(true);
     }
 
-    public static void ActivarDesactivarBotonGuardar(JButton btnGuardar, JTextField txtNombre, JTextField txtcuil, JTextField txtteleofno, JTextField txtcorreo) {
+    public static void ActivarDesactivarBotonGuardar(JButton btnGuardar, JTextField txtNombre, JTextField txtcuil, JTextField txtteleofno, JTextField txtcorreo, JTable t) {
         /*
         Metodo que activa el boton guardar siempre que el nombre y el cuil no esten vacios y 
         el cuil sea valido, ademas verifica que el numero de telefono y el correo esten
@@ -218,9 +218,17 @@ public class ControladorCliente {
         } else {
             flag = 1;
         }
-        //////////////
-        if (!"".equals(txtNombre.getText()) && ValidarCuit(txtcuil.getText()) && (txtteleofno.getText().length() == 0 || txtteleofno.getText().length() == 10) && ("".equals(txtcorreo.getText()) || valido) && flag == 0) {
-            btnGuardar.setEnabled(true);
+        if (!"".equals(txtNombre.getText()) && ValidarCuit(txtcuil.getText()) && (txtteleofno.getText().length() == 0 || txtteleofno.getText().length() == 10) && ("".equals(txtcorreo.getText()) || valido)) {
+            //una vez que se cumple eso hay dos escenarios, el primero donde estoy modificando
+            //un registro ya existente, y el segundo donde estoy introduciendo uno nuevo
+            if(t.getSelectedRow() != -1 && flag == 1){
+                //flag valdra uno por ser un registro ya cargado en la bd
+                btnGuardar.setEnabled(true);
+            }else if(flag == 0){
+                btnGuardar.setEnabled(true);
+            }else{
+                btnGuardar.setEnabled(true);
+            }
         } else {
             btnGuardar.setEnabled(false);
         }
@@ -286,6 +294,7 @@ public class ControladorCliente {
     }
 
     public static int CuilUnico(long cuil) {
+        //retorna 0 si el cuil no existe, 1 si ya existe
         DB db = new DB();
         int flag = 0;
         ArrayList<Cliente> cli = db.obtenerClientes();

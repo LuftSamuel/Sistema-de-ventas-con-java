@@ -376,7 +376,7 @@ public class VistaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
-        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo, tablaClientes);
         ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtNombreKeyReleased
 
@@ -428,22 +428,22 @@ public class VistaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_menuMaestroDetalleActionPerformed
 
     private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
-        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo, tablaClientes);
         ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtTelefonoKeyReleased
 
     private void txtDireccionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyReleased
-        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo, tablaClientes);
         ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtDireccionKeyReleased
 
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
-        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo, tablaClientes);
         ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtCorreoKeyReleased
 
     private void txtCuilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCuilKeyReleased
-        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo);
+        ControladorCliente.ActivarDesactivarBotonGuardar(btnGuardar, txtNombre, txtCuil, txtTelefono, txtCorreo, tablaClientes);
         ControladorCliente.ActivarDesactivarBotonCancelar(btnCancelar, txtNombre, txtCuil, tablaClientes, txtTelefono, txtDireccion, txtCorreo, txtBuscarCliente);
     }//GEN-LAST:event_txtCuilKeyReleased
 

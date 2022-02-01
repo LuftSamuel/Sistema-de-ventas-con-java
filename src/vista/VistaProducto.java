@@ -338,7 +338,7 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
         ControladorProducto.ActivarTabla(tablaProductos);
         ControladorProducto.VaciarBusqueda(txtBuscarProducto);
-        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto);
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto, btnVerOcultarTodos);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyReleased
@@ -388,6 +388,7 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);       
         //todo lo que esta en el boton cancelar
         ControladorProducto.DesseleccionarFila(tablaProductos);
+        ControladorProducto.ActivarTabla(tablaProductos);
         ControladorProducto.LimpiarCampos(txtDescripcion, txtCantidad, txtPrecio);
         ControladorProducto.DesactivarBoton(btnGuardar);
         ControladorProducto.DesactivarBoton(btnEliminar);
@@ -407,14 +408,14 @@ public class VistaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerOcultarTodosActionPerformed
 
     private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
-        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto);
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto, btnVerOcultarTodos);
         ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos, txtBuscarProducto);
 
     }//GEN-LAST:event_txtBuscarProductoKeyReleased
 
     private void lblLimpiarBusquedaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLimpiarBusquedaClienteMouseClicked
         ControladorProducto.VaciarBusqueda(txtBuscarProducto);
-        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto);
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto, btnVerOcultarTodos);
         ControladorProducto.ActivarDesactivarBotonCancelar(btnCancelar, txtDescripcion, txtCantidad, txtPrecio, tablaProductos, txtBuscarProducto);
 
     }//GEN-LAST:event_lblLimpiarBusquedaClienteMouseClicked
