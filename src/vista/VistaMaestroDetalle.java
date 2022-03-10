@@ -30,6 +30,7 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         tablaDetalle = new javax.swing.JTable();
         btnCrearFactura = new javax.swing.JButton();
         txtCambiarRuta = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -53,7 +54,7 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
             }
         ));
         tablaCompra.setRowHeight(25);
-        tablaCompra.setShowVerticalLines(false);
+        tablaCompra.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaCompra.getTableHeader().setReorderingAllowed(false);
         tablaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -72,7 +73,7 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
             }
         ));
         tablaDetalle.setRowHeight(25);
-        tablaDetalle.setShowVerticalLines(false);
+        tablaDetalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaDetalle.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaDetalle);
 
@@ -88,6 +89,14 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         txtCambiarRuta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCambiarRutaActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setEnabled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -107,6 +116,8 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
                         .addComponent(btnCrearFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCambiarRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -120,7 +131,8 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearFactura)
-                    .addComponent(txtCambiarRuta))
+                    .addComponent(txtCambiarRuta)
+                    .addComponent(btnCancelar))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -174,6 +186,9 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         ControladorMaestroDetalle.ActualizarTablaDetalle((DefaultTableModel) tablaDetalle.getModel(), tablaCompra);
         ControladorMaestroDetalle.ActivarDesactivarBotonCrearFactura(tablaCompra, btnCrearFactura);
         ControladorMaestroDetalle.AjustarTabla(tablaDetalle);
+        ControladorMaestroDetalle.DesactivarTabla(tablaCompra);
+        ControladorMaestroDetalle.DesactivarTabla(tablaDetalle);
+        ControladorMaestroDetalle.ActivarBoton(btnCancelar);
     }//GEN-LAST:event_tablaCompraMousePressed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -195,11 +210,23 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
         ControladorMaestroDetalle.CrearPDF(tablaCompra, tablaDetalle);
         ControladorMaestroDetalle.DesseleccionarFila(tablaCompra);
         ControladorMaestroDetalle.ActivarDesactivarBotonCrearFactura(tablaCompra, btnCrearFactura);
+        ControladorMaestroDetalle.ActivarTabla(tablaCompra);
+        ControladorMaestroDetalle.ActivarTabla(tablaDetalle);
+        ControladorMaestroDetalle.DesactivarBoton(btnCancelar);
+        ControladorMaestroDetalle.DesseleccionarFila(tablaCompra);
     }//GEN-LAST:event_btnCrearFacturaActionPerformed
 
     private void txtCambiarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarRutaActionPerformed
-       ControladorMaestroDetalle.CambiarRuta();
+        ControladorMaestroDetalle.CambiarRuta();
     }//GEN-LAST:event_txtCambiarRutaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        ControladorMaestroDetalle.ActivarTabla(tablaCompra);
+        ControladorMaestroDetalle.ActivarTabla(tablaDetalle);
+        ControladorMaestroDetalle.DesactivarBoton(btnCancelar);
+        ControladorMaestroDetalle.DesactivarBoton(btnCrearFactura);
+        ControladorMaestroDetalle.DesseleccionarFila(tablaCompra);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +264,7 @@ public class VistaMaestroDetalle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCrearFactura;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;

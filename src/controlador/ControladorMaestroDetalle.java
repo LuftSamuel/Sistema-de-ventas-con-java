@@ -131,7 +131,7 @@ public class ControladorMaestroDetalle {
             PdfWriter pdfWriter = new PdfWriter(file);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
-            pdfDocument.setDefaultPageSize(PageSize.A4); //21.5 x 28 cm?, sino a1 a2 a3
+            pdfDocument.setDefaultPageSize(PageSize.A4);
 
             float col = 280f;
             float columnWidth[] = {col, col};
@@ -256,6 +256,22 @@ public class ControladorMaestroDetalle {
             db.cambiarDirectorio(dir.toString());
         }
 
+    }
+    
+    public static void DesactivarTabla(JTable t) {
+        t.setEnabled(false);
+    }
+
+    public static void ActivarTabla(JTable t) {
+        t.setEnabled(true);
+    }
+    
+    public static void ActivarBoton(JButton boton) {
+        boton.setEnabled(true);
+    }
+
+    public static void DesactivarBoton(JButton boton) {
+        boton.setEnabled(false);
     }
 
     public static void NuevaVista() {

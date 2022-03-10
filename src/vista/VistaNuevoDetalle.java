@@ -307,11 +307,11 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Descripcion", "Cantidad", "Precio unit", "Precio total"
+                "ID", "Nombre", "Cuil"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -329,6 +329,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tablaClientes);
 
+        txtBuscarProducto.setMaximumSize(new java.awt.Dimension(7, 20));
         txtBuscarProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarProductoKeyReleased(evt);
@@ -356,6 +357,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Buscar cliente");
 
+        txtBuscarCliente.setMaximumSize(new java.awt.Dimension(7, 20));
         txtBuscarCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscarClienteKeyReleased(evt);
@@ -385,7 +387,7 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscarCliente)
+                        .addComponent(txtBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblLimpiarBusquedaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)

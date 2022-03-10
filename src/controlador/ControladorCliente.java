@@ -212,20 +212,17 @@ public class ControladorCliente {
         EmailValidator validator = EmailValidator.getInstance();
         boolean valido = validator.isValid(txtcorreo.getText());
         //////////////
-        int flag;
+        int flag = 0;
         if (!"".equals(txtcuil.getText())) {
             flag = CuilUnico(Long.parseLong(txtcuil.getText()));
-        } else {
-            flag = 1;
         }
+        //que nombre no este vacio, cuil sea valaido, telefono este vacio o sea valido, correo este vacio o sea valido
         if (!"".equals(txtNombre.getText()) && ValidarCuit(txtcuil.getText()) && (txtteleofno.getText().length() == 0 || txtteleofno.getText().length() == 10) && ("".equals(txtcorreo.getText()) || valido)) {
             //una vez que se cumple eso hay dos escenarios, el primero donde estoy modificando
             //un registro ya existente, y el segundo donde estoy introduciendo uno nuevo
-            if(t.getSelectedRow() != -1 && flag == 1){
+            if(t.getSelectedRow() == -1 && flag == 1){
                 //flag valdra uno por ser un registro ya cargado en la bd
-                btnGuardar.setEnabled(true);
-            }else if(flag == 0){
-                btnGuardar.setEnabled(true);
+                btnGuardar.setEnabled(false);
             }else{
                 btnGuardar.setEnabled(true);
             }

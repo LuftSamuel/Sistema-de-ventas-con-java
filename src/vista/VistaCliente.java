@@ -187,7 +187,7 @@ public class VistaCliente extends javax.swing.JFrame {
         jPanel2.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 200, 30));
 
         jSeparator6.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 210, 10));
+        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 200, 10));
 
         jLabel8.setFont(new java.awt.Font("Source Sans Pro Semibold", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,7 +229,6 @@ public class VistaCliente extends javax.swing.JFrame {
         });
         tablaClientes.setRowHeight(25);
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaClientes.setShowVerticalLines(false);
         tablaClientes.getTableHeader().setReorderingAllowed(false);
         tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -409,7 +408,7 @@ public class VistaCliente extends javax.swing.JFrame {
         ControladorCliente.VaciarBusqueda(txtBuscarCliente);
         ControladorCliente.BuscarCliente(tablaClientes, txtBuscarCliente);
         ControladorCliente.ActivarTabla(tablaClientes);
-        ControladorCliente.VaciarBusqueda(txtBuscarCliente);
+        ControladorCliente.VaciarBusqueda(txtBuscarCliente); //por que estara esto aca?
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void menuNuevoDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoDetalleActionPerformed
