@@ -1,7 +1,6 @@
 package modelo;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -61,18 +60,10 @@ public class DB {
             //por lo visto estos parametros de sql comienzan de 1 no de 0 y corresponden a los signos
             // de pregunta que puse arriba
 
-            if (c.getNombre() != null) { //que habre echo aca?
-                sql.setString(1, c.getNombre());
-            } else {
-                sql.setString(1, c.getNombre());
-            }
+            sql.setString(1, c.getNombre());
             sql.setLong(2, c.getCuil());
             sql.setLong(3, c.getTelefono());
-            if (c.getDireccion() != null) { //que habre echo aca?
-                sql.setString(4, c.getDireccion());
-            } else {
-                sql.setString(4, c.getDireccion());
-            }
+            sql.setString(4, c.getDireccion());
             sql.setString(5, c.getCorreo());
             sql.execute();
         } catch (Exception e) {
@@ -116,11 +107,7 @@ public class DB {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ventasonline", user, pass);
             PreparedStatement sql = con.prepareStatement("UPDATE cliente SET telefono=?, direccion=?, correo=? WHERE codigo = ?");
             sql.setLong(1, c.getTelefono());
-            if (c.getDireccion() != null) { //que habre echo aca?
-                sql.setString(2, c.getDireccion());
-            } else {
-                sql.setString(2, c.getDireccion());
-            }
+            sql.setString(2, c.getDireccion());
             sql.setString(3, c.getCorreo());
             sql.setInt(4, c.getId());
             sql.execute();

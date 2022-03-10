@@ -1,8 +1,6 @@
 package vista;
 
 import controlador.ControladorNuevoDetalle;
-import javax.swing.event.TableModelEvent; //
-import javax.swing.event.TableModelListener; //
 import javax.swing.table.DefaultTableModel;
 
 public class VistaNuevoDetalle extends javax.swing.JFrame {
@@ -238,7 +236,6 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         });
         tablaDetalles.setRowHeight(25);
         tablaDetalles.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaDetalles.setShowVerticalLines(false);
         tablaDetalles.getTableHeader().setReorderingAllowed(false);
         tablaDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -266,11 +263,13 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         });
         tablaProductos.setRowHeight(25);
         tablaProductos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaProductos.setShowVerticalLines(false);
         tablaProductos.getTableHeader().setReorderingAllowed(false);
         tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tablaProductosMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseReleased(evt);
             }
         });
         jScrollPane3.setViewportView(tablaProductos);
@@ -320,7 +319,6 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         });
         tablaClientes.setRowHeight(25);
         tablaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaClientes.setShowVerticalLines(false);
         tablaClientes.getTableHeader().setReorderingAllowed(false);
         tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -497,10 +495,12 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaClientesMousePressed
 
     private void tablaProductosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMousePressed
+        /*
         ControladorNuevoDetalle.LimpiarCampos(txtCodigo, txtDescripcion, txtCantidad, txtPreciou);
         ControladorNuevoDetalle.LlenarCamposProducto(tablaProductos, txtCodigo, txtDescripcion, txtCantidad, txtPreciou);
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnAñadir, tablaProductos);
         ControladorNuevoDetalle.ActivarDesactivarBoton(btnCancelar, tablaProductos);
+        */
     }//GEN-LAST:event_tablaProductosMousePressed
 
     private void tablaDetallesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDetallesMousePressed
@@ -596,6 +596,13 @@ public class VistaNuevoDetalle extends javax.swing.JFrame {
         ControladorNuevoDetalle.VaciarBusqueda(txtBuscarCliente);
         ControladorNuevoDetalle.BuscarCliente(tablaClientes, txtBuscarCliente);
     }//GEN-LAST:event_lblLimpiarBusquedaClienteMouseClicked
+
+    private void tablaProductosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseReleased
+        ControladorNuevoDetalle.LimpiarCampos(txtCodigo, txtDescripcion, txtCantidad, txtPreciou);
+        ControladorNuevoDetalle.LlenarCamposProducto(tablaProductos, txtCodigo, txtDescripcion, txtCantidad, txtPreciou);
+        ControladorNuevoDetalle.ActivarDesactivarBoton(btnAñadir, tablaProductos);
+        ControladorNuevoDetalle.ActivarDesactivarBoton(btnCancelar, tablaProductos);
+    }//GEN-LAST:event_tablaProductosMouseReleased
 
     /**
      * @param args the command line arguments

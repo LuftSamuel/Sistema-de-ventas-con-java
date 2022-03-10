@@ -387,13 +387,24 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.AjustarTabla(tablaProductos);
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);       
         //todo lo que esta en el boton cancelar
-        ControladorProducto.DesseleccionarFila(tablaProductos);
+        /*ControladorProducto.DesseleccionarFila(tablaProductos);
         ControladorProducto.ActivarTabla(tablaProductos);
         ControladorProducto.LimpiarCampos(txtDescripcion, txtCantidad, txtPrecio);
         ControladorProducto.DesactivarBoton(btnGuardar);
         ControladorProducto.DesactivarBoton(btnEliminar);
         ControladorProducto.DesactivarBoton(btnCancelar);
         ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
+        */
+        ControladorProducto.DesseleccionarFila(tablaProductos);
+        ControladorProducto.LimpiarCampos(txtDescripcion, txtCantidad, txtPrecio);
+        ControladorProducto.DesactivarBoton(btnGuardar);
+        ControladorProducto.DesactivarBoton(btnEliminar);
+        ControladorProducto.DesactivarBoton(btnCancelar);
+        ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
+        ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
+        ControladorProducto.ActivarTabla(tablaProductos);
+        ControladorProducto.VaciarBusqueda(txtBuscarProducto);
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto, btnVerOcultarTodos);
     }//GEN-LAST:event_btnActivarDesactivarActionPerformed
 
     private void btnVerOcultarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerOcultarTodosActionPerformed
@@ -405,6 +416,17 @@ public class VistaProducto extends javax.swing.JFrame {
         ControladorProducto.DesactivarBoton(btnCancelar);
         ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
         ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
+        //todo lo que hace el boton cancelar
+        ControladorProducto.DesseleccionarFila(tablaProductos);
+        ControladorProducto.LimpiarCampos(txtDescripcion, txtCantidad, txtPrecio);
+        ControladorProducto.DesactivarBoton(btnGuardar);
+        ControladorProducto.DesactivarBoton(btnEliminar);
+        ControladorProducto.DesactivarBoton(btnCancelar);
+        ControladorProducto.ActivarDesactivarTxtDescripcion(txtDescripcion, tablaProductos);
+        ControladorProducto.ActivarDesactivarBotonActivarDesactivar(tablaProductos, btnActivarDesactivar);
+        ControladorProducto.ActivarTabla(tablaProductos);
+        ControladorProducto.VaciarBusqueda(txtBuscarProducto);
+        ControladorProducto.BuscarProducto(tablaProductos, txtBuscarProducto, btnVerOcultarTodos);
     }//GEN-LAST:event_btnVerOcultarTodosActionPerformed
 
     private void txtBuscarProductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductoKeyReleased
